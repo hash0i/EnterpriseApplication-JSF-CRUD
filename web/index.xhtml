@@ -45,13 +45,13 @@
                             <label> Nights </label>
                             <h:inputText id="Nights" value="#{reservationBean.reservation.nights}"></h:inputText>
                             <br/>
-                            <label>Adults</label>
+                            <label>Adults </label>
                             <h:selectOneMenu value="#{reservationBean.reservation.adults}">
                                 <f:selectItem itemValue="2" itemLabel="2"/>
                                 <f:selectItem itemValue="1" itemLabel="1"/>
                             </h:selectOneMenu>
                             <br/>
-                            <label>Children</label>
+                            <label>Children </label>
                             <h:selectOneMenu value="#{reservationBean.reservation.children}">
                                 <f:selectItem itemValue="0" itemLabel="0"/>
                                 <f:selectItem itemValue="1" itemLabel="1"/>
@@ -146,6 +146,10 @@
                     <h:column>
                         <f:facet name="header">Bed Type</f:facet>
                         <h:outputText value="#{reserve.bed_type}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Smoking</f:facet>
+                        <h:outputText value="#{reserve.smoking}"></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Name</f:facet>
