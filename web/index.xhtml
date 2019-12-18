@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+#{session.setAttribute("title","Index page")}
+<ui:include src="head.xhtml"></ui:include>
+<h:body>
+    <div class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!--        <ul class="navbar-nav">-->
+        <!--            <li class="nav-item active">-->
+        <!--            <a class="nav-link" href=""> Create</a>-->
+        <!--        </li>-->
+        <!--            <li class="nav-item active">-->
+        <!--                <a class="nav-link" href=""> Remove</a>-->
+        <!--            </li>-->
+        <!--            <li class="nav-item active">-->
+        <!--                <a class="nav-link" href=""> Update</a>-->
+        <!--            </li>-->
+        <!--            <li class="nav-item active">-->
+        <!--                <a class="nav-link" href=""> Display</a>-->
+        <!--            </li>-->
+
+        <!--        </ul>-->
+
+    </div>
+
+    <div class="headers-region">
+        <h1> Reservation Request</h1>
+    </div>
+    <p:tabView>
+        <p:tab title="Create">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:form>
+                    <div class="box1">
+                        <fieldset>
+                            <legend> General Information</legend>
+                            <label> Arrival Date </label>
+                            <h:inputText id="Arrival_date" value="#{reservationBean.reservation.arrival_Date}"></h:inputText>
+                            <label> Nights </label>
+                            <h:inputText id="Nights" value="#{reservationBean.reservation.nights}"></h:inputText>
+                            <br/>
+                            <label>Adults</label>
+                            <h:selectOneMenu value="#{reservationBean.reservation.adults}">
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                            </h:selectOneMenu>
+                            <br/>
+                            <label>Children</label>
+                            <h:selectOneMenu value="#{reservationBean.reservation.children}">
+                                <f:selectItem itemValue="0" itemLabel="0"/>
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                            </h:selectOneMenu>
+                            <br/>
+                        </fieldset>
+                    </div>
+                    <div class="box2">
+                        <fieldset>
+                            <legend> Preference</legend>
+                            <label> Room Type:</label>
+                            <h:selectOneRadio value="#{reservationBean.reservation.room_type}">
+                                <f:selectItem itemValue="Standard" itemLabel="Standard"/>
+                                <f:selectItem itemValue="Business" itemLabel="Business"/>
+                            </h:selectOneRadio>
+                            <br/>
+                            <label> Bed Type:</label>
+                            <h:selectOneRadio value="#{reservationBean.reservation.bed_type}">
+                                <f:selectItem itemValue="King" itemLabel="King"/>
+                                <f:selectItem itemValue="Double Double" itemLabel="Double Double"/>
+                            </h:selectOneRadio>
+                            <br/>
+                            <label>Smoking</label> <h:selectOneRadio value="#{reservationBean.reservation.smoking}">
+                            <f:selectItem itemValue="Non-Smoking" itemLabel="Non-Smoking"/>
+                            <f:selectItem itemValue="Smoking" itemLabel="Smoking"/>
+                        </h:selectOneRadio>
+                            <br/>
+                        </fieldset>
+                    </div>
+                    <div class="box3">
+                        <fieldset>
+                            <legend> Contact Information</legend>
+                            <label>Name:</label>
+                            <p:inputText id="Name" label="Name"
+                                         value="#{reservationBean.reservation.name}"></p:inputText>
+                            <br/>
+                            <label>Email:</label>
+                            <p:inputText id="email" required="true" label="email"
+                                         requiredMessage="Must be a valid Email Address"
+                                         validatorMessage="Must be a valid Email Address"
+                                         value="#{reservationBean.reservation.email}">
+                                <f:validateRegex
+                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                            </p:inputText>
+                            <p:message for="email" style="color:red"/>
+                            <br/>
+                            <label>Phone:</label>
+                            <p:inputNumber id="phonenumber" required="true" label="phone Number"  validatorMessage="This field is required"
+                                           value="#{reservationBean.reservation.phoneNumber}">
+                                <f:validateRequired/>
+                            </p:inputNumber>
+                            <h:message for="phonenumber" style="color:red"/>
+                            <br/>
+                        </fieldset>
+                    </div>
+                    <h:commandButton value="Create" action="#{reservationBean.addReservation}"
+                                     styleClass="btn btn-primary"></h:commandButton>
+                </h:form>
+            </h:panelGrid>
+        </p:tab>
+
+        <p:tab title="Display">
+            <h:panelGrid columns="2" cellpadding="10">
+            <div class="row">
+                <h:dataTable styleClass="table table-striped table-responsive table-hover"
+                             value="#{reservationBean.allReservation}" var="reserve">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText value="#{reserve.id}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Arrival Date</f:facet>
+                        <h:outputText value="#{reserve.arrival_Date}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nights</f:facet>
+                        <h:outputText value="#{reserve.nights}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Adults</f:facet>
+                        <h:outputText value="#{reserve.adults}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Children</f:facet>
+                        <h:outputText value="#{reserve.children}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Room Type</f:facet>
+                        <h:outputText value="#{reserve.room_type}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bed Type</f:facet>
+                        <h:outputText value="#{reserve.bed_type}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{reserve.name}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                        <h:outputText value="#{reserve.email}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Phone</f:facet>
+                        <h:outputText value="#{reserve.phoneNumber}"></h:outputText>
+                    </h:column>
+                </h:dataTable>
+            </div>
+            </h:panelGrid>
+        </p:tab>
+
+        <p:tab title="Delete">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:form title="Delete">
+                    <h:column>
+                    <label> Enter the value to delete : </label>
+                    <h:inputText id="ReservationID" value="#{reservationBean.reservation.id}"></h:inputText>
+                    <br/>
+                    <h:commandButton styleClass="btn btn-danger" value="Delete"
+                                     action="#{reservationBean.deleteReservation(reservationBean.reservation.id)}"/>
+                    </h:column>
+                </h:form>
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Update">
+               <h:panelGrid columns="2" cellpadding="">
+                <h:form>
+                    <h:dataTable styleClass="table table-striped table-responsive table-hover"
+                                 value="#{reservationBean.allReservation}" var="reserve">
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText value="#{reserve.id}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Arrival Date</f:facet>
+                        <h:outputText value="#{reserve.arrival_Date}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Nights</f:facet>
+                        <h:outputText value="#{reserve.nights}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Adults</f:facet>
+                        <h:outputText value="#{reserve.adults}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Children</f:facet>
+                        <h:outputText value="#{reserve.children}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Room Type</f:facet>
+                        <h:outputText value="#{reserve.room_type}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bed Type</f:facet>
+                        <h:outputText value="#{reserve.bed_type}"></h:outputText>
+                    </h:column>
+                        <h:column>
+                            <f:facet name="header">Bed Type</f:facet>
+                            <h:outputText value="#{reserve.smoking}"></h:outputText>
+                        </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{reserve.name}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                        <h:outputText value="#{reserve.email}"></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Phone</f:facet>
+                        <h:outputText value="#{reserve.phoneNumber}"></h:outputText>
+                    </h:column>
+
+                        <h:column>
+                        <h:commandButton styleClass="btn btn-info" value="Edit"
+                                         action="#{reservationBean.updateReservation(reserve.id,reserve.arrival_Date,reserve.nights,reserve.adults,reserve.children,reserve.room_type,reserve.bed_type,reserve.smoking,reserve.name,reserve.email,reserve.phoneNumber)}"/>
+
+                        </h:column>
+                    </h:dataTable>
+
+                </h:form>
+               </h:panelGrid>
+        </p:tab>
+
+
+    </p:tabView>
+</h:body>
+</html>
