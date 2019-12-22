@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+<ui:include src="head.xhtml"></ui:include>
+
+<h:body>
+    <ui:include src="navBar.xhtml"></ui:include>
+    <div class="col text-center">
+    <h2>Login Form</h2>
+    <h:form>
+        <div class="form-group col-xs-2">
+            <label>Email address</label>
+            <h:inputText value="#{userBean.user.email}" styleClass="form-control" id="email" />
+            <h:message for="email"/>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <h:inputSecret value="#{userBean.user.password}" styleClass="form-control" id="password" />
+            <h:message for="password"/>
+        </div>
+        <h:commandButton value="Login" styleClass="btn btn-primary" action="#{userBean.LoginUser}" />
+    </h:form>
+    </div>
+</h:body>
+</html>

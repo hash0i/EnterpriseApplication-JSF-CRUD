@@ -12,4 +12,15 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
 </servlet-mapping>
+    <filter>
+        <filter-name>authenFilter</filter-name>
+        <filter-class>filters.authenFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenFilter</filter-name>
+        <url-pattern>/index.xhtml</url-pattern>
+    </filter-mapping>
+    <welcome-file-list>
+        <welcome-file>signup.xhtml</welcome-file>
+    </welcome-file-list>
 </web-app>
