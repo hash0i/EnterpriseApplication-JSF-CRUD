@@ -1,5 +1,13 @@
 package backingbean;
 
+
+import org.primefaces.event.RowEditEvent;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+@ViewScoped
 public class reservation {
     private int id;
     private String arrival_Date;
@@ -14,6 +22,7 @@ public class reservation {
     private String Name;
     private String Email;
     private int PhoneNumber;
+
     public reservation() { }
 
     public String getName() { return Name; }
@@ -49,4 +58,7 @@ public class reservation {
 
     public int getChildren() { return Children; }
     public void setChildren(int Children) { this.Children = Children; }
+
+
+
 }

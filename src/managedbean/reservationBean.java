@@ -4,14 +4,18 @@ import backingbean.reservation;
 import db.dbConnection;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @ManagedBean
-public class reservationBean {
+public class reservationBean implements Serializable {
 
     private reservation Reservation;
 
@@ -102,6 +106,18 @@ public class reservationBean {
 
         return "index";
     }
+
+
+public List<reservation> getDataTable() {
+
+        List<reservation> Resvation = new ArrayList<>();
+        if(Resvation == null)
+        {
+            Resvation = getAllReservation();
+        }
+        return Resvation;
+    }
+
 
 
 }

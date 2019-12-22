@@ -5,6 +5,7 @@ import backingbean.User;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @ManagedBean
 public class userBean {
@@ -19,6 +20,7 @@ public class userBean {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     public String LoginUser(){
         if(user.getEmail().equals("admin") && user.getPassword().equals("admin"))

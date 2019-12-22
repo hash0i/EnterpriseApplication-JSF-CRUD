@@ -219,13 +219,50 @@
                                          action="#{reservationBean.updateReservation(reserve.id,reserve.arrival_Date,reserve.nights,reserve.adults,reserve.children,reserve.room_type,reserve.bed_type,reserve.smoking,reserve.name,reserve.email,reserve.phoneNumber)}"/>
 
                         </h:column>
+
+
+
                     </h:dataTable>
 
                 </h:form>
                </h:panelGrid>
         </p:tab>
 
+        <p:tab title="Update2">
+            <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
 
+
+<!--        <p:dataTable id="cars1" var="car" value="#{reservationBean.getDataTable}" editable="true" style="margin-bottom:20px"> -->
+            <p:dataTable id="reservation1" var="reservation" value="#{reservationBean.getAllReservation}" editable="true" style="margin-bottom:20px">
+                <f:facet name="header">
+                    Edit information
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{reservationBean.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{reservationBean.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{reservation.id}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{reservation.id}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Year">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{reservation.email}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{reservation.email}" style="width:100%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px">
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+
+            </h:form>
+        </p:tab>
     </p:tabView>
 </h:body>
 </html>
